@@ -1,0 +1,8 @@
+{
+    "appService.zipIgnorePattern": [
+        "node_modules{,/**}",
+        ".vscode{,/**}"
+    ],
+    "appService.defaultWebAppToDeploy": "/subscriptions/d28fb91c-8177-4549-89df-83f8cdc47e91/resourceGroups/appsvc_linux_centralus/providers/Microsoft.Web/sites/ikwilbeachen",
+    "appService.deploySubpath": "."
+}
