@@ -14,11 +14,11 @@ router.post('/', function (req, res, next) {
   let reservation = req.body;
   reservation.id = _id++;
   _reservations.unshift(reservation);
-  _reservations.sort(
-    (a, b) => a.startDateTime.getTime() - b.startDateTime.getTime()
-  );
+  // _reservations.sort(
+  //   (a, b) => a.startDateTime.getTime() - b.startDateTime.getTime()
+  // );
 
-  res.send('Got a POST request at /reservation:' + req.body);
+  res.send(reservation);
 });
 
 /* DELETE a reservation. */
