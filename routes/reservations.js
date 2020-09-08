@@ -6,7 +6,7 @@ var _reservations = [];
 
 /* GET reservations listing. */
 router.get('/', function (req, res, next) {
-  res.send(_reservations);
+  res.json(_reservations);
 });
 
 /* POST create a reservation. */
@@ -18,16 +18,19 @@ router.post('/', function (req, res, next) {
   //   (a, b) => a.startDateTime.getTime() - b.startDateTime.getTime()
   // );
 
-  res.send(reservation);
+  res.status(201).json(reservation);
 });
 
 /* DELETE a reservation. */
 router.delete('/:id', function (req, res, next) {
   let id = parseInt(req.params.id);
   let index = _reservations.map(reservation => { return reservation.id }).indexOf(id);
-  _reservations.splice(index, 1);
-
-  res.send('Got a DELETE request at /reservation');
+  if (index === -1) {
+    res.status(404).end();
+  } else {
+    _reservations.splice(index, 1);
+    res.status(204).end();
+  }
 });
 
 module.exports = router;
