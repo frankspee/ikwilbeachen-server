@@ -21,6 +21,22 @@ router.post('/', function (req, res, next) {
   res.status(201).json(reservation);
 });
 
+/* PUT update a reservation. */
+router.put('/:id', function (req, res, next) {
+  let id = parseInt(req.params.id);
+  let index = _reservations.map(reservation => { return reservation.id }).indexOf(id);
+  if (index === -1) {
+    res.status(404).end();
+  } else {
+    _reservations.splice(index, 1);
+
+    let reservation = req.body;
+    _reservations.unshift(reservation);
+
+    res.status(204).end();
+  }
+});
+
 /* DELETE a reservation. */
 router.delete('/:id', function (req, res, next) {
   let id = parseInt(req.params.id);
