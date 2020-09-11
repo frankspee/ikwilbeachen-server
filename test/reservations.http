@@ -1,0 +1,17 @@
+GET http://localhost:3000/reservations/ HTTP/1.1
+
+###
+
+POST http://localhost:3000/reservations/ HTTP/1.1
+content-type: application/json
+
+{
+    "id": null,
+    "startDateTime": "Wed, 21 Oct 2020 18:30:00 GMT",
+    "endDateTime": "Wed, 21 Oct 2020 20:30:00 GMT",
+    "players": []
+}
+
+###
+
+DELETE http://localhost:3000/reservations/9 HTTP/1.1

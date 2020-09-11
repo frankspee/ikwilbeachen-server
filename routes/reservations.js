@@ -7,17 +7,17 @@ var _reservations = [];
 /* GET reservations listing. */
 router.get('/', function (req, res, next) {
   res.json(_reservations);
+  // TODO: add backend sorting?
+  // _reservations.sort(
+  //   (a, b) => a.startDateTime.getTime() - b.startDateTime.getTime()
+  // );
 });
 
 /* POST create a reservation. */
 router.post('/', function (req, res, next) {
   let reservation = req.body;
   reservation.id = _id++;
-  _reservations.unshift(reservation);
-  // _reservations.sort(
-  //   (a, b) => a.startDateTime.getTime() - b.startDateTime.getTime()
-  // );
-
+  _reservations.push(reservation);
   res.status(201).json(reservation);
 });
 
@@ -28,6 +28,7 @@ router.put('/:id', function (req, res, next) {
   if (index === -1) {
     res.status(404).end();
   } else {
+    // TODO: improve this remove / add functionality to an edit one!!
     _reservations.splice(index, 1);
 
     let reservation = req.body;
