@@ -4,5 +4,6 @@
         ".vscode{,/**}"
     ],
     "appService.defaultWebAppToDeploy": "/subscriptions/d28fb91c-8177-4549-89df-83f8cdc47e91/resourceGroups/appsvc_linux_centralus/providers/Microsoft.Web/sites/ikwilbeachen",
-    "appService.deploySubpath": "."
+    "appService.deploySubpath": ".",
+    "compile-hero.disable-compile-files-on-did-save-code": false
 }

@@ -25,6 +25,7 @@ router.post('/', function (req, res, next) {
 router.put('/:id', function (req, res, next) {
   let id = parseInt(req.params.id);
   let index = _reservations.map(reservation => { return reservation.id }).indexOf(id);
+  // let activityToDelete = _reservations.find(i => i.id == id);
   if (index === -1) {
     res.status(404).end();
   } else {
@@ -41,13 +42,22 @@ router.put('/:id', function (req, res, next) {
 /* DELETE a reservation. */
 router.delete('/:id', function (req, res, next) {
   let id = parseInt(req.params.id);
-  let index = _reservations.map(reservation => { return reservation.id }).indexOf(id);
+  
+  let index = _reservations.findIndex(i => i.id == id);
   if (index === -1) {
     res.status(404).end();
-  } else {
-    _reservations.splice(index, 1);
-    res.status(204).end();
+    return;
   }
+
+  let activityToDelete = _reservations.find(i => i.id == id);
+  let userId = req.header('x-user-id');
+  if (activityToDelete && activityToDelete.creatorId !== userId) {
+    res.status(403).send({ci: activityToDelete.creatorId, ui: userId});
+    return;
+  }
+    
+  _reservations.splice(index, 1);
+  res.status(204).end();
 });
 
 module.exports = router;
