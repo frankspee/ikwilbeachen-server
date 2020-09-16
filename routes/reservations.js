@@ -6,11 +6,8 @@ var _reservations = [];
 
 /* GET reservations listing. */
 router.get('/', function (req, res, next) {
-  res.json(_reservations);
-  // TODO: add backend sorting?
-  // _reservations.sort(
-  //   (a, b) => a.startDateTime.getTime() - b.startDateTime.getTime()
-  // );
+  let activities = _reservations;
+  res.json(activities);
 });
 
 /* POST create a reservation. */
@@ -24,25 +21,22 @@ router.post('/', function (req, res, next) {
 /* PUT update a reservation. */
 router.put('/:id', function (req, res, next) {
   let id = parseInt(req.params.id);
-  let index = _reservations.map(reservation => { return reservation.id }).indexOf(id);
-  // let activityToDelete = _reservations.find(i => i.id == id);
-  if (index === -1) {
+  let activityToUpdate = _reservations.find(i => i.id == id);
+  
+  if (!activityToUpdate) {
     res.status(404).end();
-  } else {
-    // TODO: improve this remove / add functionality to an edit one!!
-    _reservations.splice(index, 1);
-
-    let reservation = req.body;
-    _reservations.unshift(reservation);
-
-    res.status(204).end();
+    return;
   }
+
+  let activity = req.body;
+  Object.assign(activityToUpdate, activity);
+  res.status(204).end();
 });
 
 /* DELETE a reservation. */
 router.delete('/:id', function (req, res, next) {
   let id = parseInt(req.params.id);
-  
+
   let index = _reservations.findIndex(i => i.id == id);
   if (index === -1) {
     res.status(404).end();
@@ -52,10 +46,10 @@ router.delete('/:id', function (req, res, next) {
   let activityToDelete = _reservations.find(i => i.id == id);
   let userId = req.header('x-user-id');
   if (activityToDelete && activityToDelete.creatorId !== userId) {
-    res.status(403).send({ci: activityToDelete.creatorId, ui: userId});
+    res.status(403).send({ ci: activityToDelete.creatorId, ui: userId });
     return;
   }
-    
+
   _reservations.splice(index, 1);
   res.status(204).end();
 });
