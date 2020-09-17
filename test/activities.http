@@ -1,8 +1,8 @@
-GET http://localhost:3000/reservations/ HTTP/1.1
+GET http://localhost:3000/activities/ HTTP/1.1
 
 ###
 
-POST http://localhost:3000/reservations/ HTTP/1.1
+POST http://localhost:3000/activities/ HTTP/1.1
 content-type: application/json
 
 {
@@ -15,10 +15,10 @@ content-type: application/json
 
 ###
 
-DELETE http://localhost:3000/reservations/0 HTTP/1.1
+DELETE http://localhost:3000/activities/0 HTTP/1.1
 X-USER-ID: ef3ceb7ffedc5c53
 
 ###
 
-DELETE http://localhost:3000/reservations/0 HTTP/1.1
+DELETE http://localhost:3000/activities/0 HTTP/1.1
 X-USER-ID: ef3ceb7ffedc5c55
