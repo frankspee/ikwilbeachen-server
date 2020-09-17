@@ -1,20 +1,35 @@
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const express = require('express');
+const logger = require('morgan');
+const mongoose = require("mongoose");
+const config = require("./config.db");
 
-var indexRouter = require('./routes/index');
-var activitiesRouter = require('./routes/activities');
+const app = express();
 
-var app = express();
+//configure database and mongoose
+mongoose.set("useCreateIndex", true);
+mongoose
+    .connect(config.database, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        useFindAndModify: false,
+        useCreateIndex: true
+    })
+    .then(() => {
+        console.log("Database is connected");
+    })
+    .catch(err => {
+        console.log({ database_error: err });
+    });
 
-app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(logger('dev'));
 
-app.use('/', indexRouter);
+app.use('/', (req, res) => {
+    console.log("Hello MEVN Soldier");
+});
+
+const activitiesRouter = require('./routes/activities');
 app.use('/activities', activitiesRouter);
 
 module.exports = app;
