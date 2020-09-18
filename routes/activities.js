@@ -7,7 +7,7 @@ router.get('/', function (req, res, next) {
   Activity.find({}, function (err, result) {
     if (err) {
       res.status(500).send(err);
-      throw err;
+      return;
     }
     res.json(result);
   });
@@ -20,7 +20,7 @@ router.get('/:id', function (req, res, next) {
   Activity.findOne({ '_id': id }, function (err, result) {
     if (err) {
       res.status(500).send(err);
-      throw err;
+      return;
     }
 
     console.log(result);
@@ -53,12 +53,15 @@ router.post('/', async function (req, res, next) {
 /* PUT update a activity. */
 router.put('/:id', function (req, res, next) {
   let id = req.params.id;
+
+  // FIXME: bug when an attendees are already updated then this fails
+  // TODO: need to get the attendees in a separate model or something
   let activity = req.body;
 
   Activity.updateOne({ '_id': id }, activity, function (err, result) {
     if (err) {
       res.status(500).send(err);
-      throw err;
+      return;
     }
 
     console.log(result);
@@ -80,7 +83,7 @@ router.delete('/:id', function (req, res, next) {
   Activity.deleteOne({ '_id': id, 'creatorId': userId }, function (err, result) {
     if (err) {
       res.status(500).send(err);
-      throw err;
+      return;
     }
 
     console.log(result);
