@@ -7,8 +7,8 @@ const ActivitySchema = new Schema({
     id: ObjectId,
     startDateTime: Date,
     endDateTime: Date,
-    attendees: Array,
-    creatorId: Number
+    attendees: [String],
+    creatorId: String
 });
 
 const Activity = mongoose.model("Activity", ActivitySchema);

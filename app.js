@@ -25,10 +25,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(logger('dev'));
 
-app.use('/', (req, res) => {
-    console.log("Hello MEVN Soldier");
-});
-
 const activitiesRouter = require('./routes/activities');
 app.use('/activities', activitiesRouter);
 

@@ -2,11 +2,14 @@ GET http://localhost:3000/activities/ HTTP/1.1
 
 ###
 
+GET http://localhost:3000/activities/5f64a66431789726403dcaa7 HTTP/1.1
+
+###
+
 POST http://localhost:3000/activities/ HTTP/1.1
 content-type: application/json
 
 {
-    "id": null,
     "startDateTime": "Wed, 21 Oct 2020 18:30:00 GMT",
     "endDateTime": "Wed, 21 Oct 2020 20:30:00 GMT",
     "attendees": [],
@@ -15,10 +18,19 @@ content-type: application/json
 
 ###
 
-DELETE http://localhost:3000/activities/0 HTTP/1.1
+PUT http://localhost:3000/activities/5f64a66431789726403dcaa7 HTTP/1.1
+content-type: application/json
+
+{
+    "attendees": ["ef3ceb7ffedc5c50"]
+}
+
+###
+
+DELETE http://localhost:3000/activities/5f64a66431789726403dcaa7 HTTP/1.1
 X-USER-ID: ef3ceb7ffedc5c53
 
 ###
 
-DELETE http://localhost:3000/activities/0 HTTP/1.1
+DELETE http://localhost:3000/activities/5f64a66431789726403dcaa7 HTTP/1.1
 X-USER-ID: ef3ceb7ffedc5c55
