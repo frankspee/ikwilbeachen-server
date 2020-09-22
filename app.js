@@ -1,7 +1,10 @@
+const nodEnv = process.env.NODE_ENV;
 const express = require('express');
 const logger = require('morgan');
 const mongoose = require("mongoose");
-const config = (process.env.NODE_ENV === "production" ? require("./config.db") : require("./config.db.dev"));
+const config = (nodEnv === "production" ? require("./config.db") : require("./config.db.dev"));
+
+console.log('NODE_ENV: ' + nodEnv);
 
 const app = express();
 
