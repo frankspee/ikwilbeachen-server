@@ -1,0 +1,36 @@
+GET https://ikwilbeachen.azurewebsites.net/activities/ HTTP/1.1
+
+###
+
+GET https://ikwilbeachen.azurewebsites.net/activities/5f64ade29863040a5815dfa5 HTTP/1.1
+
+###
+
+POST https://ikwilbeachen.azurewebsites.net/activities/ HTTP/1.1
+content-type: application/json
+
+{
+    "startDateTime": "Wed, 21 Oct 2020 18:30:00 GMT",
+    "endDateTime": "Wed, 21 Oct 2020 20:30:00 GMT",
+    "attendees": [],
+    "creatorId": "ef3ceb7ffedc5c55"
+}
+
+###
+
+PUT https://ikwilbeachen.azurewebsites.net/activities/5f64ade29863040a5815dfa5 HTTP/1.1
+content-type: application/json
+
+{
+    "attendees": ["ef3ceb7ffedc5c50"]
+}
+
+###
+
+DELETE https://ikwilbeachen.azurewebsites.net/activities/5f64a66431789726403dcaa7 HTTP/1.1
+X-USER-ID: ef3ceb7ffedc5c53
+
+###
+
+DELETE https://ikwilbeachen.azurewebsites.net/activities/5f6397844e86c84718e8fce3 HTTP/1.1
+X-USER-ID: ef3ceb7ffedc5c55
