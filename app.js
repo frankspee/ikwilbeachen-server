@@ -1,7 +1,7 @@
 const express = require('express');
 const logger = require('morgan');
 const mongoose = require("mongoose");
-const config = require("./config.db");
+const config = (process.env.NODE_ENV == "production" ? require("./config.db") : require("./config.db.dev"));
 
 const app = express();
 
